@@ -1127,15 +1127,17 @@ export default function Home() {
                </div>
             </div>
 
-            <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-30 w-full text-center px-4">
+            <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-30 w-full text-center px-4 pt-8 md:pt-0">
                 <p className="text-xl md:text-2xl text-gray-400 font-serif italic font-light tracking-wide">
-                    “No middlemen. No leakage. No dependency.”
+                    "No middlemen. No leakage. No dependency."
                 </p>
             </div>
 
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30">
-                <button onClick={() => window.scrollTo({ top: 1 * window.innerHeight, behavior: 'smooth' })} className="group flex flex-col items-center gap-2 text-white/50 hover:text-white text-xs font-sans tracking-wide transition-colors">
-                  Scroll to Explore <ArrowRight className="rotate-90 group-hover:translate-y-1 transition-transform" size={16} />
+                <button onClick={() => window.scrollTo({ top: 1 * window.innerHeight, behavior: 'smooth' })} className="group flex flex-row items-center gap-2 text-white/50 hover:text-white text-xs font-sans tracking-wide transition-colors">
+                  <span className="md:hidden">Drag to Explore</span>
+                  <span className="hidden md:inline">Scroll to Explore</span>
+                  <ArrowRight className="md:rotate-90 group-hover:translate-x-1 md:group-hover:translate-x-0 md:group-hover:translate-y-1 transition-transform" size={16} />
                 </button>
             </div>
           </SectionWrapper>
