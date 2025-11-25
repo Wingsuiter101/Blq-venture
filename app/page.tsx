@@ -764,9 +764,13 @@ export default function Home() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [activeActionIndex, setActiveActionIndex] = useState<number | null>(0);
   const [vpWidth, setVpWidth] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setVpWidth(window.innerWidth);
+    const handleResize = () => {
+      setVpWidth(window.innerWidth);
+      setIsMobile(window.innerWidth < 768);
+    };
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -796,13 +800,24 @@ export default function Home() {
   // We want to move from 0 to -((SECTIONS.length - 1) * 100)vw.
   const x = useTransform(scrollYProgress, [0, 1], ["0vw", `-${(SECTIONS.length - 1) * 100}vw`]);
   
-  // STICKY SNAPPING LOGIC
-  // Increased stiffness for a snappier, more "locked-in" feel
+  // STICKY SNAPPING LOGIC (Desktop)
   const smoothX = useSpring(x, { 
     stiffness: 150, 
     damping: 25,    
     mass: 0.5         
   });
+
+  // MOBILE LOGIC: Driven strictly by index for perfect alignment
+  // We decouple this from scroll pixels to avoid address-bar drift issues.
+  const targetIndex = useMotionValue(0);
+  const smoothIndex = useSpring(targetIndex, { stiffness: 150, damping: 25, mass: 0.5 });
+  const mobileX = useTransform(smoothIndex, (v) => `-${v * 100}vw`);
+
+  useEffect(() => {
+    if (isMobile) {
+      targetIndex.set(currentSectionIndex);
+    }
+  }, [currentSectionIndex, isMobile, targetIndex]);
 
   // Snap logic on scroll end
   useEffect(() => {
@@ -1072,7 +1087,7 @@ export default function Home() {
       <div className="fixed top-0 left-0 h-screen w-full overflow-hidden bg-black">
         <motion.div 
           style={{ 
-            x: smoothX, 
+            x: isMobile ? mobileX : smoothX, 
             width: `${SECTIONS.length * 100}vw`,
           } as any} 
           className="flex h-full"
