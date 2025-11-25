@@ -845,7 +845,41 @@ export default function Home() {
     return () => unsubscribe();
   }, [scrollY, currentSectionIndex]);
 
+  useEffect(() => {
+    const handleTouchMove = (e: TouchEvent) => {
+      // If we are inside a scrollable element, allow propagation (so inner content scrolls)
+      // Otherwise prevent default to stop the whole page from scrolling vertically
+      let target = e.target as HTMLElement;
+      let isScrollable = false;
+      
+      while (target && target !== document.body) {
+        // Check if element is vertically scrollable
+        if (target.scrollHeight > target.clientHeight) {
+          const overflowY = window.getComputedStyle(target).overflowY;
+          if (overflowY === 'auto' || overflowY === 'scroll') {
+            isScrollable = true;
+            break;
+          }
+        }
+        target = target.parentElement as HTMLElement;
+      }
+
+      if (!isScrollable) {
+         e.preventDefault(); // Block native vertical scroll on the page root
+      }
+    };
+    
+    // Use passive: false to allow preventDefault
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+    return () => {
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
   // --- Mobile Swipe Handler ---
+  const [isNavigating, setIsNavigating] = useState(false);
+
   useEffect(() => {
     let touchStartX = 0;
     let touchStartY = 0;
@@ -856,6 +890,8 @@ export default function Home() {
     };
     
     const handleTouchEnd = (e: TouchEvent) => {
+      if (isNavigating) return;
+
       const touchEndX = e.changedTouches[0].clientX;
       const touchEndY = e.changedTouches[0].clientY;
       
@@ -863,20 +899,28 @@ export default function Home() {
       const diffY = touchStartY - touchEndY;
       
       // If horizontal swipe is dominant and significant
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
         const direction = diffX > 0 ? 1 : -1; // 1 = next (swipe left), -1 = prev (swipe right)
         const nextIndex = Math.min(Math.max(currentSectionIndex + direction, 0), SECTIONS.length - 1);
         
         if (nextIndex !== currentSectionIndex) {
+            setIsNavigating(true);
+            
+            // Calculate exact scroll target based on strict viewport height units
+            // Using window.innerHeight ensures we match the browser's current visible height calculation
+            const targetScroll = nextIndex * window.innerHeight;
+            
             window.scrollTo({
-                top: nextIndex * window.innerHeight,
+                top: targetScroll,
                 behavior: 'smooth'
             });
+
+            // Reset navigation lock after animation duration approx
+            setTimeout(() => setIsNavigating(false), 600);
         }
       }
     };
     
-    // Add non-passive listener to allow default prevention if needed (though we aren't preventing here)
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     
@@ -884,7 +928,7 @@ export default function Home() {
         window.removeEventListener('touchstart', handleTouchStart);
         window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [currentSectionIndex]);
+  }, [currentSectionIndex, isNavigating]);
 
   return (
     <div ref={containerRef} className="bg-black text-foreground font-sans selection:bg-primary selection:text-white relative">
