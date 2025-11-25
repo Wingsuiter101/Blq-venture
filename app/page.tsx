@@ -562,7 +562,7 @@ function InvestmentCarousel() {
       highlights: ["BrandLogiq", "BLQ Agency"],
       breakdown: [
         { label: "Acquisition Stake", value: "51%", bold: true },
-        { label: "Seller Payout", value: "NPR 3 Cr", bold: false },
+        { label: "Investor Payout", value: "NPR 3 Cr", bold: false },
         { label: "Existing Shareholders", value: "NPR 2 Cr", bold: false }
       ],
       advantages: [
