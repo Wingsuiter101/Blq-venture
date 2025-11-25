@@ -525,7 +525,7 @@ const SectionWrapper = ({
 }) => (
   <section
     id={id}
-    style={{ ...style, width: 'var(--vw-fix, 100vw)' }}
+    style={{ ...style, width: '100vw' }}
     className={`
       shrink-0 h-screen
       flex flex-col
@@ -791,9 +791,10 @@ export default function Home() {
   });
 
   // Map vertical scroll (0 to 1) to horizontal translation
-  // We use strict pixel calculations to prevent mobile viewport unit inconsistencies.
-  // Fallback to 0 initially to avoid hydration mismatch, then snap to correct width.
-  const x = useTransform(scrollYProgress, [0, 1], ["0px", `-${(SECTIONS.length - 1) * (vpWidth || 0)}px`]);
+  // We use vw units directly to ensure perfect alignment regardless of device pixel width or scrollbar quirks.
+  // The container width is exactly SECTIONS.length * 100vw.
+  // We want to move from 0 to -((SECTIONS.length - 1) * 100)vw.
+  const x = useTransform(scrollYProgress, [0, 1], ["0vw", `-${(SECTIONS.length - 1) * 100}vw`]);
   
   // STICKY SNAPPING LOGIC
   // Increased stiffness for a snappier, more "locked-in" feel
@@ -1072,8 +1073,7 @@ export default function Home() {
         <motion.div 
           style={{ 
             x: smoothX, 
-            width: vpWidth ? `${vpWidth * SECTIONS.length}px` : `${SECTIONS.length * 100}%`,
-            "--vw-fix": vpWidth ? `${vpWidth}px` : '100vw'
+            width: `${SECTIONS.length * 100}vw`,
           } as any} 
           className="flex h-full"
         >
