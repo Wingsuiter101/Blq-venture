@@ -280,7 +280,7 @@ function SynergyEngine() {
       </div>
 
       {/* Output Section */}
-      <div className="mt-2 md:mt-6 mb-8 md:mb-0 flex items-center justify-center">
+      <div className="mt-2 md:mt-6 mb-8 md:mb-0 pt-8 md:pt-0 flex items-center justify-center">
         <AnimatePresence>
           {showOutput && (
             <motion.div
@@ -1432,7 +1432,7 @@ export default function Home() {
           <SectionWrapper id="sports-infra" className="bg-[#080808] border-l border-white/5">
              <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full">
                 {/* Left Visual - Equipment Image */}
-                <div className="relative h-1/2 lg:h-full w-full flex items-center justify-center bg-black shrink-0 overflow-hidden">
+                <div className="relative aspect-square lg:aspect-auto lg:h-full w-full flex items-center justify-center bg-black shrink-0 overflow-hidden">
                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
                    {/* eslint-disable-next-line @next/next/no-img-element */}
                    <img 
@@ -1449,7 +1449,7 @@ export default function Home() {
                 
                 {/* Right Specs */}
                 <div className="p-6 md:p-24 flex flex-col justify-center bg-black overflow-y-auto no-scrollbar" style={{ touchAction: 'pan-y' }}>
-                   <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 md:mb-12">Broadcast Stack</h3>
+                   <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 md:mb-12">Equipment</h3>
                    <div className="space-y-0">
                       {[
                          { l: "Replay", r: "EVS XT-VIA" },
