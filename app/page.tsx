@@ -96,7 +96,7 @@ function Sidebar({ isOpen, setIsOpen, currentSection }: { isOpen: boolean, setIs
               </button>
             </div>
 
-            <nav className="flex-1 overflow-y-auto no-scrollbar space-y-2">
+            <nav className="flex-1 overflow-y-auto no-scrollbar space-y-2" style={{ touchAction: 'pan-y' }}>
               {SECTIONS.map((section, idx) => {
                 const isActive = currentSection === idx;
                 return (
@@ -931,7 +931,11 @@ export default function Home() {
   }, [currentSectionIndex, isNavigating]);
 
   return (
-    <div ref={containerRef} className="bg-black text-foreground font-sans selection:bg-primary selection:text-white relative">
+    <div 
+      ref={containerRef} 
+      className="bg-black text-foreground font-sans selection:bg-primary selection:text-white relative"
+      style={{ touchAction: 'none' }} // Disable native browser scrolling/zooming
+    >
       
       {/* --- Fixed UI Elements --- */}
       
@@ -992,7 +996,7 @@ export default function Home() {
               </button>
 
               {/* Content */}
-              <div className="p-8 md:p-16 overflow-y-auto max-h-[85vh] no-scrollbar">
+              <div className="p-8 md:p-16 overflow-y-auto max-h-[85vh] no-scrollbar" style={{ touchAction: 'pan-y' }}>
                 {/* Header */}
                 <div className="mb-8 md:mb-12">
                   <div className="inline-block px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-sans tracking-wide mb-4">
@@ -1127,7 +1131,7 @@ export default function Home() {
                <div className="mb-8 md:mb-20 border-b border-white/10 pb-4 md:pb-8">
                   <h2 className="text-4xl md:text-8xl font-serif font-bold text-white">The Problem</h2>
                </div>
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 overflow-y-auto md:overflow-visible pr-2 md:pr-0 no-scrollbar flex-1">
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 overflow-y-auto md:overflow-visible pr-2 md:pr-0 no-scrollbar flex-1" style={{ touchAction: 'pan-y' }}>
                   {[
                     { title: "Foreign Dependence", desc: "Relying on expensive foreign production.", icon: Globe },
                     { title: "Fragmentation", desc: "Disconnected OTT, TV, and Agency.", icon: Layers },
@@ -1157,7 +1161,7 @@ export default function Home() {
                 VISION
              </div>
 
-            <div className="max-w-7xl w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-16 items-center overflow-y-auto md:overflow-visible no-scrollbar h-full md:h-auto py-8">
+            <div className="max-w-7xl w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-16 items-center overflow-y-auto md:overflow-visible no-scrollbar h-full md:h-auto py-8" style={{ touchAction: 'pan-y' }}>
                
                {/* Visual Abstract - First on Mobile, Second on Desktop */}
                <div className="lg:col-span-5 relative flex justify-center order-1 lg:order-2">
@@ -1250,7 +1254,7 @@ export default function Home() {
                 <h2 className="text-4xl md:text-7xl font-serif font-bold text-white mb-4 md:mb-6">The Ecosystem</h2>
                 <p className="text-xl md:text-2xl text-gray-500 mb-10 md:mb-20 font-light">Four pillars. One powerhouse.</p>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 overflow-y-auto md:overflow-visible flex-1 md:flex-none pb-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 overflow-y-auto md:overflow-visible flex-1 md:flex-none pb-4" style={{ touchAction: 'pan-y' }}>
                    {[
                       { title: "DishHome OTT", sub: "Hub", icon: Tv, bg: "hover:bg-blue-900/20 hover:border-blue-500" },
                       { title: "BLQ Studios", sub: "Production", icon: Film, bg: "hover:bg-orange-900/20 hover:border-orange-500" },
@@ -1277,7 +1281,7 @@ export default function Home() {
              {/* Background Glow */}
              <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
              
-             <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-20 h-full items-center relative z-10 overflow-y-auto md:overflow-visible no-scrollbar py-8">
+             <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-20 h-full items-center relative z-10 overflow-y-auto md:overflow-visible no-scrollbar py-8" style={{ touchAction: 'pan-y' }}>
                 {/* Left Content */}
                 <div className="space-y-6 md:space-y-12">
                    <div>
@@ -1351,7 +1355,7 @@ export default function Home() {
                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 h-auto md:h-[60vh] overflow-y-auto md:overflow-visible no-scrollbar pb-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 h-auto md:h-[60vh] overflow-y-auto md:overflow-visible no-scrollbar pb-4" style={{ touchAction: 'pan-y' }}>
                    {[
                       { 
                         name: "Studio A", 
@@ -1427,7 +1431,7 @@ export default function Home() {
                 </div>
                 
                 {/* Right Specs */}
-                <div className="p-6 md:p-24 flex flex-col justify-center bg-black overflow-y-auto no-scrollbar">
+                <div className="p-6 md:p-24 flex flex-col justify-center bg-black overflow-y-auto no-scrollbar" style={{ touchAction: 'pan-y' }}>
                    <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 md:mb-12">Broadcast Stack</h3>
                    <div className="space-y-0">
                       {[
@@ -1463,7 +1467,7 @@ export default function Home() {
                    <p className="text-lg md:text-2xl text-gray-600 italic font-serif">"Turning Attention into Revenue"</p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 overflow-y-auto md:overflow-visible no-scrollbar pb-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 overflow-y-auto md:overflow-visible no-scrollbar pb-4" style={{ touchAction: 'pan-y' }}>
                    {["Sponsorship", "Ad Sales", "Brand Mgmt", "Integration", "Creative", "Influencers"].map((item, i) => (
                       <div key={i} className="border-t border-black p-4 md:p-8 text-left hover:bg-black hover:text-white transition-colors duration-500 group cursor-default shrink-0">
                          <div className="text-[10px] md:text-xs font-mono mb-2 md:mb-4 text-gray-400 group-hover:text-primary">0{i+1}</div>
@@ -1481,7 +1485,7 @@ export default function Home() {
                    <div className="text-9xl font-black text-black/10 font-sans">24/7</div>
                 </div>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24 items-center h-full overflow-y-auto md:overflow-visible no-scrollbar py-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24 items-center h-full overflow-y-auto md:overflow-visible no-scrollbar py-8" style={{ touchAction: 'pan-y' }}>
                    <div className="shrink-0">
                       <div className="inline-flex items-center gap-3 bg-black text-white px-4 py-2 rounded-full text-xs font-bold mb-4 md:mb-8">
                          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div> LIVE
@@ -1556,7 +1560,7 @@ export default function Home() {
 
           {/* 9. Synergy */}
           <SectionWrapper id="synergy" className="bg-black border-l border-white/5">
-             <div className="max-w-6xl w-full text-center relative h-full flex flex-col justify-start md:justify-center items-center px-4 md:px-8 gap-8 md:gap-12 overflow-y-auto md:overflow-visible no-scrollbar py-8">
+             <div className="max-w-6xl w-full text-center relative h-full flex flex-col justify-start md:justify-center items-center px-4 md:px-8 gap-8 md:gap-12 overflow-y-auto md:overflow-visible no-scrollbar py-8" style={{ touchAction: 'pan-y' }}>
                 <div className="shrink-0">
                    <h2 className="text-3xl md:text-5xl font-bold text-white font-serif mb-3 md:mb-4">The Circular Engine</h2>
                    <p className="text-base md:text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
@@ -1574,7 +1578,7 @@ export default function Home() {
 
           {/* 10. Financials */}
           <SectionWrapper id="financials" className="bg-[#050505] border-l border-white/5">
-             <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24 overflow-y-auto md:overflow-visible no-scrollbar h-full py-8 items-center">
+             <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24 overflow-y-auto md:overflow-visible no-scrollbar h-full py-8 items-center" style={{ touchAction: 'pan-y' }}>
                 <div className="shrink-0">
                    <h2 className="text-4xl md:text-6xl font-bold text-white font-serif mb-6 md:mb-12">OTT Financials</h2>
                    <div className="flex gap-8 md:gap-16 mb-8 md:mb-16">
@@ -1631,7 +1635,7 @@ export default function Home() {
                 <p className="text-sm md:text-lg text-gray-500 font-sans mb-6 md:mb-12 text-center">
                   The people that power studios, OTT, agency and sports.
                 </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 bg-transparent md:bg-transparent border-none md:border-none overflow-y-auto md:overflow-visible no-scrollbar flex-1 md:flex-none pb-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 bg-transparent md:bg-transparent border-none md:border-none overflow-y-auto md:overflow-visible no-scrollbar flex-1 md:flex-none pb-4" style={{ touchAction: 'pan-y' }}>
                    {[
                       { role: "Technical", icon: Camera, img: `${BASE_PATH}/technical.png`, ppl: ["Director", "Camera", "Audio"] },
                       { role: "Creative", icon: Mic, img: `${BASE_PATH}/creative.png`, ppl: ["Producer", "Writer", "Editor"] },
