@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --background: #111111;
+  --foreground: #f3f4f6;
+  --primary: #ef4444; /* Red-500 */
+  --primary-dark: #991b1b; /* Red-800 */
+  --secondary: #4b5563; /* Gray-600 */
+  --secondary-light: #9ca3af; /* Gray-400 */
+  --accent-gray: #1f2937; /* Gray-800 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-roboto-slab);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-accent-gray: var(--accent-gray);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(10px, -15px); }
+  50% { transform: translate(-5px, -25px); }
+  75% { transform: translate(-15px, -10px); }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 0; filter: blur(4px); transform: scale(0.9); }
+  50% { opacity: 1; filter: blur(0px); transform: scale(1); }
+}
+
+.animate-float-slow {
+  /* opacity: 0; ensures it starts invisible and fades in with animation */
+  opacity: 0;
+  animation: float 15s infinite ease-in-out, soft-pulse 8s infinite ease-in-out;
+}
+
+.animate-float-medium {
+  opacity: 0;
+  animation: float 12s infinite ease-in-out reverse, soft-pulse 8s infinite ease-in-out 2s;
+}
+
+.animate-float-fast {
+  opacity: 0;
+  animation: float 10s infinite ease-in-out, soft-pulse 8s infinite ease-in-out 4s;
+}
+
+.animate-float-delayed {
+  opacity: 0;
+  animation: float 18s infinite ease-in-out reverse, soft-pulse 8s infinite ease-in-out 6s;
+}
