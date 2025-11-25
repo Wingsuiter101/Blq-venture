@@ -776,9 +776,9 @@ export default function Home() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Disable scroll when modal is open
+  // Disable scroll when sidebar or modal is open
   useEffect(() => {
-    if (manifestoOpen) {
+    if (isSidebarOpen || manifestoOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -786,7 +786,7 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [manifestoOpen]);
+  }, [isSidebarOpen, manifestoOpen]);
   
   // Native scroll hook from Framer Motion
   const { scrollYProgress, scrollY } = useScroll({
