@@ -845,6 +845,47 @@ export default function Home() {
     return () => unsubscribe();
   }, [scrollY, currentSectionIndex]);
 
+  // --- Mobile Swipe Handler ---
+  useEffect(() => {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    };
+    
+    const handleTouchEnd = (e: TouchEvent) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+      
+      // If horizontal swipe is dominant and significant
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        const direction = diffX > 0 ? 1 : -1; // 1 = next (swipe left), -1 = prev (swipe right)
+        const nextIndex = Math.min(Math.max(currentSectionIndex + direction, 0), SECTIONS.length - 1);
+        
+        if (nextIndex !== currentSectionIndex) {
+            window.scrollTo({
+                top: nextIndex * window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+      }
+    };
+    
+    // Add non-passive listener to allow default prevention if needed (though we aren't preventing here)
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    
+    return () => {
+        window.removeEventListener('touchstart', handleTouchStart);
+        window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [currentSectionIndex]);
+
   return (
     <div ref={containerRef} className="bg-black text-foreground font-sans selection:bg-primary selection:text-white relative">
       
