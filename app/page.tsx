@@ -53,13 +53,13 @@ const SECTIONS = [
   { id: "hero", label: "Home", icon: Play },
   { id: "problem", label: "Problem", icon: AlertTriangle },
   { id: "vision", label: "Vision", icon: Eye },
+  { id: "synergy", label: "Synergy", icon: RefreshCw },
   { id: "ecosystem", label: "Ecosystem", icon: Layers },
   { id: "dishhome-ott", label: "DishHome OTT", icon: Tv },
   { id: "blq-studios", label: "BLQ Studios", icon: Film },
-  { id: "sports-infra", label: "Sports Infra", icon: Video },
   { id: "blq-agency", label: "BLQ Agency", icon: Briefcase },
   { id: "action-sports", label: "Action Sports", icon: Activity },
-  { id: "synergy", label: "Synergy", icon: RefreshCw },
+  { id: "sports-infra", label: "Sports Infra", icon: Video },
   { id: "financials", label: "Financials", icon: TrendingUp },
   { id: "team", label: "Team", icon: Users },
   { id: "edge-ask", label: "Edge & Ask", icon: Zap },
@@ -550,9 +550,33 @@ function InvestmentCarousel() {
   const slides = [
     {
       id: 0,
-      tag: "OTT Build-Out",
+      tag: "Agency Acquisition",
+      tagColor: "bg-white/10 text-white",
+      title: "BLQ Acquisition",
+      amount: "5",
+      unit: "Cr",
+      unitColor: "text-gray-400",
+      borderColor: "border-white/20 hover:border-white/40",
+      glowColor: "",
+      description: "Acquisition of BrandLogiq to become BLQ Agency, consolidating monetization capabilities across OTT, TV, and sports.",
+      highlights: ["BrandLogiq", "BLQ Agency"],
+      breakdown: [
+        { label: "Acquisition Stake", value: "51%", bold: true },
+        { label: "Seller Payout", value: "NPR 3 Cr", bold: false },
+        { label: "Existing Shareholders", value: "NPR 2 Cr", bold: false }
+      ],
+      advantages: [
+        { label: "Consolidation", desc: <>Full Agency<br/>Integration</>, icon: Briefcase },
+        { label: "Monetization", desc: <>Cross-Platform<br/>Revenue</>, icon: TrendingUp },
+        { label: "Existing", desc: <>Proven Track<br/>Record</>, icon: CheckCircle2 },
+        { label: "Control", desc: <>51% Majority<br/>Stake</>, icon: Zap }
+      ]
+    },
+    {
+      id: 1,
+      tag: "Build-Out",
       tagColor: "bg-primary/20 text-primary",
-      title: "OTT Infrastructure",
+      title: "Infrastructure",
       amount: "19.2",
       unit: "Cr",
       unitColor: "text-primary",
@@ -572,30 +596,6 @@ function InvestmentCarousel() {
         { label: "Control", desc: <>End-to-End<br/>Ownership</>, icon: Server },
         { label: "Model", desc: <>Recurring<br/>Revenue</>, icon: TrendingUp },
         { label: "Asset", desc: <>Sports IP<br/>Rights</>, icon: Video }
-      ]
-    },
-    {
-      id: 1,
-      tag: "Agency Acquisition",
-      tagColor: "bg-white/10 text-white",
-      title: "BrandLogiq Acquisition",
-      amount: "5",
-      unit: "Cr",
-      unitColor: "text-gray-400",
-      borderColor: "border-white/20 hover:border-white/40",
-      glowColor: "",
-      description: "Acquisition of BrandLogiq to become BLQ Agency, consolidating monetization capabilities across OTT, TV, and sports.",
-      highlights: ["BrandLogiq", "BLQ Agency"],
-      breakdown: [
-        { label: "Acquisition Stake", value: "51%", bold: true },
-        { label: "Seller Payout", value: "NPR 3 Cr", bold: false },
-        { label: "Existing Shareholders", value: "NPR 2 Cr", bold: false }
-      ],
-      advantages: [
-        { label: "Consolidation", desc: <>Full Agency<br/>Integration</>, icon: Briefcase },
-        { label: "Monetization", desc: <>Cross-Platform<br/>Revenue</>, icon: TrendingUp },
-        { label: "Existing", desc: <>Proven Track<br/>Record</>, icon: CheckCircle2 },
-        { label: "Control", desc: <>51% Majority<br/>Stake</>, icon: Zap }
       ]
     }
   ];
@@ -688,7 +688,7 @@ function InvestmentCarousel() {
                 {currentSlide.breakdown.map((item: any, i: number) => (
                   typeof item === 'string' ? (
                     <div key={i} className="flex items-center gap-2 text-[11px] md:text-xs lg:text-sm text-gray-400">
-                      <div className={`w-1 md:w-1.5 h-1 md:h-1.5 ${activeSlide === 0 ? 'bg-primary' : 'bg-white/50'} rounded-full shrink-0`}></div>
+                      <div className={`w-1 md:w-1.5 h-1 md:h-1.5 ${activeSlide === 1 ? 'bg-primary' : 'bg-white/50'} rounded-full shrink-0`}></div>
                       <span>{item}</span>
                     </div>
                   ) : (
@@ -1261,7 +1261,25 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 3. Ecosystem */}
+          {/* 3. Synergy */}
+          <SectionWrapper id="synergy" className="bg-black border-l border-white/5">
+             <div className="max-w-6xl w-full text-center relative h-full flex flex-col justify-start md:justify-center items-center px-4 md:px-8 gap-8 md:gap-12 overflow-y-auto md:overflow-visible no-scrollbar py-8" style={{ touchAction: 'pan-y' }}>
+                <div className="shrink-0">
+                   <h2 className="text-3xl md:text-5xl font-bold text-white font-serif mb-3 md:mb-4">The Circular Engine</h2>
+                   <p className="text-base md:text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
+                      Capital and talent are transformed by <span className="text-white">Studios</span>, <span className="text-white">OTT</span>, <span className="text-white">TV</span>, and <span className="text-white">Agency</span> into IP and revenue.
+                   </p>
+                </div>
+                
+                <SynergyEngine />
+                
+                <div className="text-[10px] md:text-xs font-mono text-gray-600 uppercase tracking-widest shrink-0">
+                   Click "Input" to watch the engine process capital into value
+                </div>
+             </div>
+          </SectionWrapper>
+
+          {/* 4. Ecosystem */}
           <SectionWrapper id="ecosystem" className="bg-black border-l border-white/5">
              <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
                 <div className="w-[80vw] h-[80vw] border border-white/10 rounded-full"></div>
@@ -1273,17 +1291,26 @@ export default function Home() {
                 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 overflow-y-auto md:overflow-visible flex-1 md:flex-none pb-4" style={{ touchAction: 'pan-y' }}>
                    {[
-                      { title: "DishHome OTT", sub: "Hub", icon: Tv, bg: "hover:bg-blue-900/20 hover:border-blue-500" },
-                      { title: "BLQ Studios", sub: "Production", icon: Film, bg: "hover:bg-orange-900/20 hover:border-orange-500" },
-                      { title: "BLQ Agency", sub: "Monetisation", icon: Briefcase, bg: "hover:bg-green-900/20 hover:border-green-500" },
-                      { title: "Action Sports", sub: "Broadcast", icon: Activity, bg: "hover:bg-red-900/20 hover:border-red-500" },
+                      { title: "DishHome OTT", sub: "Hub", icon: Tv, bg: "hover:bg-blue-900/20 hover:border-blue-500", img: `${BASE_PATH}/dishome.png`, sectionIndex: 5 },
+                      { title: "BLQ Studios", sub: "Production", icon: Film, bg: "hover:bg-orange-900/20 hover:border-orange-500", img: `${BASE_PATH}/blqstudios.png`, sectionIndex: 6 },
+                      { title: "BLQ Agency", sub: "Monetisation", icon: Briefcase, bg: "hover:bg-green-900/20 hover:border-green-500", img: `${BASE_PATH}/blqagency.png`, sectionIndex: 7 },
+                      { title: "Action Sports", sub: "Broadcast", icon: Activity, bg: "hover:bg-red-900/20 hover:border-red-500", img: `${BASE_PATH}/actionsports.png`, sectionIndex: 8 },
                    ].map((item, idx) => (
-                      <div key={idx} className={`aspect-4/5 border border-white/10 bg-white/5 p-4 md:p-8 flex flex-col justify-between transition-all duration-300 group cursor-pointer ${item.bg}`}>
-                         <div className="flex justify-between items-start">
+                      <div 
+                        key={idx} 
+                        onClick={() => window.scrollTo({ top: item.sectionIndex * window.innerHeight, behavior: 'smooth' })}
+                        className={`aspect-4/5 border border-white/10 bg-white/5 p-4 md:p-8 flex flex-col justify-between transition-all duration-300 group cursor-pointer ${item.bg} relative overflow-hidden`}
+                      >
+                         {/* Background Image */}
+                         <div 
+                           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                           style={{ backgroundImage: `url('${item.img}')` }}
+                         />
+                         <div className="relative z-10 flex justify-between items-start">
                             <span className="font-mono text-xs text-gray-500">0{idx+1}</span>
                             <item.icon className="text-gray-400 group-hover:text-white transition-colors w-6 h-6 md:w-8 md:h-8" />
                          </div>
-                         <div className="text-left">
+                         <div className="text-left relative z-10">
                             <h3 className="text-xl md:text-3xl font-bold font-serif text-white mb-1 md:mb-2">{item.title}</h3>
                             <p className="text-[10px] md:text-xs font-sans tracking-wide text-gray-500 group-hover:text-primary transition-colors">{item.sub}</p>
                          </div>
@@ -1293,7 +1320,7 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 4. DishHome OTT */}
+          {/* 5. DishHome OTT */}
           <SectionWrapper id="dishhome-ott" className="bg-[#0a0a0a] border-l border-white/5 relative overflow-hidden">
              {/* Background Glow */}
              <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
@@ -1355,7 +1382,7 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 5. BLQ Studios */}
+          {/* 6. BLQ Studios */}
           <SectionWrapper id="blq-studios" className="bg-black border-l border-white/5">
              <div className="max-w-7xl w-full flex flex-col h-full justify-center px-4 md:px-0">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-12">
@@ -1428,47 +1455,7 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 6. Sports Infra */}
-          <SectionWrapper id="sports-infra" className="bg-[#080808] border-l border-white/5">
-             <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full">
-                {/* Left Visual - Equipment Image */}
-                <div className="relative aspect-square lg:aspect-auto lg:h-full w-full flex items-center justify-center bg-black shrink-0 overflow-hidden">
-                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
-                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                   <img 
-                      src={`${BASE_PATH}/Equipment.png`}
-                      alt="Broadcast Equipment Stack" 
-                      className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
-                   />
-                   <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/50"></div>
-                   <div className="absolute bottom-6 md:bottom-12 left-6 md:left-12 z-10">
-                      <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-2">Broadcast Stack</h2>
-                      <p className="text-base md:text-xl text-primary font-sans tracking-wide">Professional Grade Equipment</p>
-                   </div>
-                </div>
-                
-                {/* Right Specs */}
-                <div className="p-6 md:p-24 flex flex-col justify-center bg-black overflow-y-auto no-scrollbar" style={{ touchAction: 'pan-y' }}>
-                   <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 md:mb-12">Equipment</h3>
-                   <div className="space-y-0">
-                      {[
-                         { l: "Replay", r: "EVS XT-VIA" },
-                         { l: "Graphics", r: "Vizrt / WASP 3D" },
-                         { l: "Cameras", r: "Sony HDC-4300" },
-                         { l: "Lenses", r: "95x Box Lens" },
-                         { l: "Audio", r: "Field Mics + Booth" },
-                      ].map((spec, i) => (
-                         <div key={i} className="flex justify-between py-4 md:py-6 border-b border-white/10 hover:pl-4 transition-all cursor-default">
-                            <span className="text-gray-500 font-sans text-xs md:text-sm">{spec.l}</span>
-                            <span className="text-white font-serif text-lg md:text-xl text-right pl-4">{spec.r}</span>
-                         </div>
-                      ))}
-                   </div>
-                </div>
-             </div>
-          </SectionWrapper>
-
-          {/* 7. BLQ Agency */}
+          {/* 8. BLQ Agency */}
           <SectionWrapper id="blq-agency" className="bg-white text-black border-l border-black/5">
              <div className="max-w-6xl w-full text-center flex flex-col h-full justify-center px-4 md:px-0">
                 <div className="mb-8 md:mb-16 shrink-0">
@@ -1495,9 +1482,14 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 8. Action Sports */}
-          <SectionWrapper id="action-sports" className="bg-primary border-l border-black/5">
-             <div className="max-w-[95vw] w-full relative h-full flex flex-col justify-center">
+          {/* 9. Action Sports */}
+          <SectionWrapper id="action-sports" className="bg-primary border-l border-black/5 relative">
+             {/* Background Image */}
+             <div 
+               className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+               style={{ backgroundImage: `url('${BASE_PATH}/Action-sports-bg.jpeg')` }}
+             />
+             <div className="max-w-[95vw] w-full relative z-10 h-full flex flex-col justify-center">
                 <div className="absolute top-0 right-0 p-6 md:p-12 hidden md:block">
                    <div className="text-9xl font-black text-black/10 font-sans">24/7</div>
                 </div>
@@ -1575,29 +1567,51 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 9. Synergy */}
-          <SectionWrapper id="synergy" className="bg-black border-l border-white/5">
-             <div className="max-w-6xl w-full text-center relative h-full flex flex-col justify-start md:justify-center items-center px-4 md:px-8 gap-8 md:gap-12 overflow-y-auto md:overflow-visible no-scrollbar py-8" style={{ touchAction: 'pan-y' }}>
-                <div className="shrink-0">
-                   <h2 className="text-3xl md:text-5xl font-bold text-white font-serif mb-3 md:mb-4">The Circular Engine</h2>
-                   <p className="text-base md:text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                      Capital and talent are transformed by <span className="text-white">Studios</span>, <span className="text-white">OTT</span>, <span className="text-white">TV</span>, and <span className="text-white">Agency</span> into IP and revenue.
-                   </p>
+          {/* 10. Sports Infra */}
+          <SectionWrapper id="sports-infra" className="bg-[#080808] border-l border-white/5">
+             <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full">
+                {/* Left Visual - Equipment Image */}
+                <div className="relative aspect-square lg:aspect-auto lg:h-full w-full flex items-center justify-center bg-black shrink-0 overflow-hidden">
+                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
+                   {/* eslint-disable-next-line @next/next/no-img-element */}
+                   <img 
+                      src={`${BASE_PATH}/Equipment.png`}
+                      alt="Broadcast Equipment Stack" 
+                      className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
+                   />
+                   <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/50"></div>
+                   <div className="absolute bottom-6 md:bottom-12 left-6 md:left-12 z-10">
+                      <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-2">Sports Infrastructure</h2>
+                      <p className="text-base md:text-xl text-primary font-sans tracking-wide">Professional Grade Equipment</p>
+                   </div>
                 </div>
                 
-                <SynergyEngine />
-                
-                <div className="text-[10px] md:text-xs font-mono text-gray-600 uppercase tracking-widest shrink-0">
-                   Click "Input" to watch the engine process capital into value
+                {/* Right Specs */}
+                <div className="p-6 md:p-24 flex flex-col justify-center bg-black overflow-y-auto no-scrollbar" style={{ touchAction: 'pan-y' }}>
+                   <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 md:mb-12">Broadcast Stack</h3>
+                   <div className="space-y-0">
+                      {[
+                         { l: "Replay", r: "EVS XT-VIA" },
+                         { l: "Graphics", r: "Vizrt / WASP 3D" },
+                         { l: "Cameras", r: "Sony HDC-4300" },
+                         { l: "Lenses", r: "95x Box Lens" },
+                         { l: "Audio", r: "Field Mics + Booth" },
+                      ].map((spec, i) => (
+                         <div key={i} className="flex justify-between py-4 md:py-6 border-b border-white/10 hover:pl-4 transition-all cursor-default">
+                            <span className="text-gray-500 font-sans text-xs md:text-sm">{spec.l}</span>
+                            <span className="text-white font-serif text-lg md:text-xl text-right pl-4">{spec.r}</span>
+                         </div>
+                      ))}
+                   </div>
                 </div>
              </div>
           </SectionWrapper>
 
-          {/* 10. Financials */}
+          {/* 11. Financials */}
           <SectionWrapper id="financials" className="bg-[#050505] border-l border-white/5">
              <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-24 overflow-y-auto md:overflow-visible no-scrollbar h-full py-8 items-center" style={{ touchAction: 'pan-y' }}>
                 <div className="shrink-0">
-                   <h2 className="text-4xl md:text-6xl font-bold text-white font-serif mb-6 md:mb-12">OTT Financials</h2>
+                   <h2 className="text-4xl md:text-6xl font-bold text-white font-serif mb-6 md:mb-12">Financials</h2>
                    <div className="flex gap-8 md:gap-16 mb-8 md:mb-16">
                       <div>
                          <div className="text-5xl md:text-7xl font-bold text-white font-serif mb-2">30</div>
@@ -1645,7 +1659,7 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 11. Team */}
+          {/* 12. Team */}
           <SectionWrapper id="team" className="bg-black border-l border-white/5">
              <div className="max-w-6xl w-full h-full flex flex-col justify-center px-4 md:px-0">
                 <h2 className="text-4xl md:text-6xl font-bold text-white font-serif mb-2 md:mb-6 text-center">Talent Structure</h2>
@@ -1693,7 +1707,7 @@ export default function Home() {
              </div>
           </SectionWrapper>
 
-          {/* 12. Edge & Ask - Carousel */}
+          {/* 13. Edge & Ask - Carousel */}
           <SectionWrapper id="edge-ask" className="bg-black border-l border-white/5 relative flex items-center justify-center">
              {/* Stronger Red Glow */}
              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-primary/10 via-black to-black opacity-60"></div>
